@@ -5,7 +5,6 @@ import FilterBar from '@/components/FilterBar';
 import LargeWebCard from './LargeWebCard';
 
 const Body = ({ websites }) => {
-  console.log('websites', websites);
   return (
     <div className='px-32'>
       <h2 className='text-[42px]'>
@@ -14,7 +13,7 @@ const Body = ({ websites }) => {
       <FilterBar />
       <div className='mt-16 grid grid-cols-3 gap-8'>
         {websites.map((website, index) => (
-          <LargeWebCard website={website} key={website.id} />
+          <LargeWebCard website={website} key={index} />
         ))}
       </div>
     </div>

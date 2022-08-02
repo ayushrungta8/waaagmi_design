@@ -1,4 +1,4 @@
-import Airtable from 'airtable';
+import axios from 'axios';
 import * as React from 'react';
 
 import Body from '@/components/Body';
@@ -17,42 +17,16 @@ export default function HomePage() {
     }
   };
   const [websites, setWebsites] = React.useState([]);
-  const base = new Airtable({ apiKey: 'key8ZGeFgoqmrS4DB' }).base(
-    'appc1kGE8syzfCfBR'
-  );
 
   React.useEffect(() => {
-    base('websites')
-      .select({
-        // Selecting the first 3 records in Grid view:
-        // maxRecords: 3,
-        view: 'Grid view',
-      })
-      .eachPage(
-        function page(records, fetchNextPage) {
-          // This function (`page`) will get called for each page of records.
-          // console.log(records);
-          const tempWebsites = [];
-          records.forEach((record) => {
-            tempWebsites.push(record.fields);
-          });
-          setWebsites([...websites, ...tempWebsites]);
-          // To fetch the next page of records, call `fetchNextPage`.
-          // If there are more records, `page` will get called again.
-          // If there are no more records, `done` will get called.
-          fetchNextPage();
-        },
-        function done(err) {
-          if (err) {
-            console.error(err);
-            return;
-          }
-        }
-      );
+    const getWebsites = async () => {
+      const res = await axios.get('/api/getData');
+      setWebsites(res.data);
+    };
+    getWebsites();
   }, []);
   return (
     <Layout>
-      {/* <Seo templateTitle='Home' /> */}
       <Seo />
 
       <main className='bg-black text-white' onClick={handleClickOutside}>
