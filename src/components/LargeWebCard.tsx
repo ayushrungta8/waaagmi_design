@@ -1,6 +1,8 @@
 import React from 'react';
 
-const LargeWebCard = ({ website }) => {
+import { Website } from '@/contexts/websiteContext';
+
+const LargeWebCard = ({ website }: { website: Website }) => {
   return (
     <div
       className='h-full min-h-[400px] w-full min-w-[200px]  bg-cover bg-top bg-no-repeat'

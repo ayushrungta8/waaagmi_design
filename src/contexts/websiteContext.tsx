@@ -25,7 +25,9 @@ interface WebsiteContextProps {
   filters: string[];
   setFilters: (filters: string[]) => void;
 }
-
+interface homePage {
+  url: string;
+}
 const WebsiteContext = createContext<WebsiteContextProps>(initialValue);
 export interface Website {
   name?: string;
@@ -35,7 +37,7 @@ export interface Website {
   tags?: string;
   user?: string;
   email?: string;
-  homepage?: string;
+  homePage?: homePage[];
   verified?: boolean;
 }
 

@@ -12,7 +12,7 @@ const Hero = ({
 }: {
   showDetailsForm: boolean;
   setShowDetailsForm: React.Dispatch<React.SetStateAction<boolean>>;
-  modalRef: React.RefObject<HTMLDivElement>;
+  modalRef: React.RefObject<HTMLFormElement>;
 }) => {
   const { websites } = useContext(WebsiteContext);
 

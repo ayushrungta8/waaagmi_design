@@ -14,8 +14,11 @@ export const captureScreenshot = async (websiteUrl, name) => {
   });
   const page = await browser.newPage();
   await page.goto(websiteUrl);
+  await new Promise((resolve) => setTimeout(resolve, 5000));
+
   await page.screenshot({
     path: './public/uploads/' + name + '.png',
+    fullPage: true,
   });
   await page.close();
   await browser.close();

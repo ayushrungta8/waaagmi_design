@@ -8,7 +8,7 @@ import Seo from '@/components/Seo';
 
 import { WebsiteProvider } from '@/contexts/websiteContext';
 export default function HomePage() {
-  const modalRef = React.useRef<HTMLDivElement>(null);
+  const modalRef = React.useRef<HTMLFormElement>(null);
   const [showDetailsForm, setShowDetailsForm] = React.useState<boolean>(false);
 
   const handleClickOutside = (e: React.MouseEvent) => {

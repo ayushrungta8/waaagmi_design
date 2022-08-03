@@ -1,7 +1,22 @@
 import axios from 'axios';
 import React from 'react';
-const WebsiteForm = ({ showDetailsForm, setShowDetailsForm, modalRef }) => {
-  const [details, setDetails] = React.useState('');
+const WebsiteForm = ({
+  showDetailsForm,
+  setShowDetailsForm,
+  modalRef,
+}: {
+  showDetailsForm: boolean;
+  setShowDetailsForm: React.Dispatch<React.SetStateAction<boolean>>;
+  modalRef: React.RefObject<HTMLFormElement>;
+}) => {
+  interface Details {
+    title: string;
+    url: string;
+    description: string;
+    image: string;
+    icon?: string;
+  }
+  const [details, setDetails] = React.useState<Details>();
 
   const formatUrl = (url: string) => {
     if (url.includes('http://') || url.includes('https://')) {
@@ -9,10 +24,10 @@ const WebsiteForm = ({ showDetailsForm, setShowDetailsForm, modalRef }) => {
     }
     return `http://${url}`;
   };
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const data = new FormData(e.target);
-    const tempUrl = data.get('url');
+    const data = new FormData(e.target as HTMLFormElement);
+    const tempUrl: string = data.get('url') as string;
     try {
       const res = await axios.post('/api/getMeta', {
         websiteUrl: formatUrl(tempUrl),
@@ -23,21 +38,22 @@ const WebsiteForm = ({ showDetailsForm, setShowDetailsForm, modalRef }) => {
       alert('Website not found. Please check the url and try again.');
     }
   };
-  const handleDetailsSubmit = async (e) => {
+  const handleDetailsSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const data = new FormData(e.target);
-    const tags = data.get('tags').split(',');
-    const user = data.get('user');
-    const email = data.get('email');
+    const data = new FormData(e.target as HTMLFormElement);
+    const tagsString: string = data.get('tags') as string;
+    const tags = tagsString.split(',');
+    const user = data.get('user') as string;
+    const email = data.get('email') as string;
 
     await axios.post(`/api/submitData`, {
       websiteDetails: {
-        name: details.title,
-        url: details.url,
+        name: details?.title,
+        url: details?.url,
         tags: tags.toString(),
         user: user,
         email: email,
-        image: details.image,
+        image: details?.image,
         date: new Date(),
       },
     });
@@ -131,7 +147,6 @@ const WebsiteForm = ({ showDetailsForm, setShowDetailsForm, modalRef }) => {
           </button>
         </form>
       )}
-      {/* <WebsiteDetailsForm /> */}
     </>
   );
 };
