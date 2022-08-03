@@ -3,7 +3,7 @@ import React from 'react';
 const WebsiteForm = ({ showDetailsForm, setShowDetailsForm, modalRef }) => {
   const [details, setDetails] = React.useState('');
 
-  const formatUrl = (url) => {
+  const formatUrl = (url: string) => {
     if (url.includes('http://') || url.includes('https://')) {
       return url;
     }

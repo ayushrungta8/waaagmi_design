@@ -3,12 +3,10 @@ import React from 'react';
 const LargeWebCard = ({ website }) => {
   return (
     <div
-      className='h-full min-h-[400px] w-full min-w-[200px]  bg-cover bg-center bg-no-repeat'
+      className='h-full min-h-[400px] w-full min-w-[200px]  bg-cover bg-top bg-no-repeat'
       style={{
         backgroundImage: `url(${
-          website?.homePage
-            ? website.homePage[0].url
-            : 'https://google.com/test.png'
+          website?.homePage ? website.homePage[0].url : website.image
         })`,
       }}
     >

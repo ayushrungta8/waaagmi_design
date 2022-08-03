@@ -1,9 +1,21 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 import SmallWebCard from '@/components/SmallWebCard';
 import WebsiteForm from '@/components/WebsiteForm';
 
-const Hero = ({ showDetailsForm, setShowDetailsForm, modalRef, websites }) => {
+import { WebsiteContext } from '@/contexts/websiteContext';
+
+const Hero = ({
+  showDetailsForm,
+  setShowDetailsForm,
+  modalRef,
+}: {
+  showDetailsForm: boolean;
+  setShowDetailsForm: React.Dispatch<React.SetStateAction<boolean>>;
+  modalRef: React.RefObject<HTMLDivElement>;
+}) => {
+  const { websites } = useContext(WebsiteContext);
+
   return (
     <div>
       <div className='flex w-full p-32'>
@@ -27,24 +39,9 @@ const Hero = ({ showDetailsForm, setShowDetailsForm, modalRef, websites }) => {
       </div>
       <div className='h-56 overflow-hidden'>
         <div className='scroll-animate flex  gap-4 '>
-          {websites.map((website, index) => (
+          {websites?.map((website, index) => (
             <SmallWebCard website={website} key={index} />
           ))}
-          {/* <SmallWebCard />
-          <SmallWebCard />
-          <SmallWebCard />
-          <SmallWebCard />
-          <SmallWebCard />
-          <SmallWebCard />
-          <SmallWebCard />
-          <SmallWebCard />
-          <SmallWebCard />
-          <SmallWebCard />
-          <SmallWebCard />
-          <SmallWebCard />
-          <SmallWebCard />
-          <SmallWebCard />
-          <SmallWebCard /> */}
         </div>
       </div>
     </div>
