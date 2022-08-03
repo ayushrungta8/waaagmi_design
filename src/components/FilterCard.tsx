@@ -1,9 +1,12 @@
-import React, { useContext } from 'react';
+import React from 'react';
 
-import { WebsiteContext } from '@/contexts/websiteContext';
-
-const FilterCard = ({ children, onClick }) => {
-  const { filters } = useContext(WebsiteContext);
+const FilterCard = ({
+  children,
+  onClick,
+}: {
+  children: React.ReactNode;
+  onClick: () => void;
+}) => {
   return (
     <div
       className='flex cursor-pointer bg-white bg-opacity-10 px-4 py-2 text-center'
