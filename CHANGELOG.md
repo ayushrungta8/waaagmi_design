@@ -257,10 +257,10 @@ This changelog is manually generated and not accurate with the package.json, onl
     You can also customize it per page by overriding the title, description as props
 
     ```tsx
-    <Seo title='Next.js Tailwind Starter' description='your description' />
+    <Seo title='waaagmi.design' description='your description' />
     ```
 
-    or if you want to still keep the title like `%s | Next.js Tailwind Starter`, you can use `templateTitle` props.
+    or if you want to still keep the title like `%s | waaagmi.design`, you can use `templateTitle` props.
 
 - #### Custom 404 Page
 

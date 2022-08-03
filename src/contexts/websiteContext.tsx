@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from 'react';
+import { createContext, useCallback, useEffect, useState } from 'react';
 const initialValue = {
   websites: [],
   setWebsites: () => {
@@ -50,16 +50,24 @@ const WebsiteProvider = ({ children }: { children: React.ReactNode }) => {
     setSelectedWebsites(websites);
   }, [websites]);
 
-  const filterWebsites = () => {
+  const filterWebsites = useCallback(() => {
+    if (filters.length === 0) {
+      setSelectedWebsites(websites);
+      return;
+    }
     const temp: Website[] = [];
     websites.forEach((website) => {
-      if (website?.tags?.includes(filters[0])) {
-        temp.push(website);
-      }
+      filters.forEach((filter) => {
+        if (website?.tags?.includes(filter)) {
+          temp.push(website);
+        }
+      });
     });
     setSelectedWebsites(temp);
-  };
-
+  }, [websites, filters]);
+  useEffect(() => {
+    filterWebsites();
+  }, [filters, websites, filterWebsites]);
   return (
     <WebsiteContext.Provider
       value={{
