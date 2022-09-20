@@ -3,7 +3,6 @@ import * as React from 'react';
 import Body from '@/components/Body';
 import Hero from '@/components/Hero';
 import Layout from '@/components/layout/Layout';
-import Loader from '@/components/Loader';
 import Navbar from '@/components/Navbar';
 import Seo from '@/components/Seo';
 

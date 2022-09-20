@@ -15,9 +15,7 @@ export const captureScreenshot = async (websiteUrl) => {
   const page = await browser.newPage();
   await page.goto(websiteUrl);
   await new Promise((resolve) => setTimeout(resolve, 5000));
-  console.log(
-    websiteUrl.replace('https://', '').replace('http://', '').replace('/', '')
-  );
+
   await page.screenshot({
     path:
       './public/uploads/' +
