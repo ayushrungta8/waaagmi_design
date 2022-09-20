@@ -3,6 +3,7 @@ import * as React from 'react';
 import Body from '@/components/Body';
 import Hero from '@/components/Hero';
 import Layout from '@/components/layout/Layout';
+import Loader from '@/components/Loader';
 import Navbar from '@/components/Navbar';
 import Seo from '@/components/Seo';
 
@@ -10,7 +11,6 @@ import { WebsiteProvider } from '@/contexts/websiteContext';
 export default function HomePage() {
   const modalRef = React.useRef<HTMLFormElement>(null);
   const [showDetailsForm, setShowDetailsForm] = React.useState<boolean>(false);
-
   const handleClickOutside = (e: React.MouseEvent) => {
     if (modalRef.current && !modalRef.current.contains(e.target as Node)) {
       setShowDetailsForm(false);
@@ -21,7 +21,7 @@ export default function HomePage() {
     <WebsiteProvider>
       <Layout>
         <Seo />
-
+        {/* <Loader /> */}
         <main
           className='min-h-screen bg-black text-white'
           onClick={(event: React.MouseEvent) => handleClickOutside(event)}

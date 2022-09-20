@@ -1,10 +1,10 @@
 import puppeteer from 'puppeteer';
 
 export default async function screenshot(req, res) {
-  await captureScreenshot(req.body.websiteUrl, req.body.name);
+  await captureScreenshot(req.body.websiteUrl);
   res.status(200);
 }
-export const captureScreenshot = async (websiteUrl, name) => {
+export const captureScreenshot = async (websiteUrl) => {
   const browser = await puppeteer.launch({
     defaultViewport: {
       width: 1920,
@@ -15,12 +15,24 @@ export const captureScreenshot = async (websiteUrl, name) => {
   const page = await browser.newPage();
   await page.goto(websiteUrl);
   await new Promise((resolve) => setTimeout(resolve, 5000));
-
+  console.log(
+    websiteUrl.replace('https://', '').replace('http://', '').replace('/', '')
+  );
   await page.screenshot({
-    path: './public/uploads/' + name + '.png',
+    path:
+      './public/uploads/' +
+      websiteUrl
+        .replace('https://', '')
+        .replace('http://', '')
+        .replace('/', '') +
+      '.png',
     fullPage: true,
   });
   await page.close();
   await browser.close();
-  return '/uploads/' + name + '.png';
+  return (
+    '/uploads/' +
+    websiteUrl.replace('https://', '').replace('http://', '').replace('/', '') +
+    '.png'
+  );
 };

@@ -19,15 +19,54 @@
 }
 @keyframes scroll {
   0% {
-    margin-left: 0;
+    left: 0;
   }
   50% {
-    margin-left: -100%;
+    right: 0;
   }
   100% {
-    margin-left: 0%;
+    left: 0;
   }
 }
+@keyframes scrollreverse {
+  /* 0% {
+    right: 0;
+  }
+  50% {
+    left: 0;
+  }
+  100% {
+    left: -100%;
+    transform: translateX(-100%);
+  } */
+}
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.spin {
+  animation: spin 3s linear infinite;
+}
+@keyframes slide {
+  0% {
+    transform: translateX(100%);
+  }
+
+  100% {
+    transform: translateX(0%);
+  }
+}
+.slideIn {
+  animation: slide 0.3s ease-in-out;
+}
 .scroll-animate {
-  animation: scroll 50s linear 1s infinite;
+  animation: scroll 10s linear 1s infinite;
+}
+
+.scroll-animate2 {
+  animation: scrollreverse 10s linear 1s infinite;
 }

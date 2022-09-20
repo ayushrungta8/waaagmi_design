@@ -84,7 +84,7 @@ const WebsiteForm = ({
 
       {showDetailsForm && (
         <form
-          className='fixed  top-0 right-0 h-[100vh] w-[400px] overflow-y-scroll bg-white p-6 text-black'
+          className='slideIn fixed top-0 right-0 z-50 h-[100vh] w-[400px] overflow-auto bg-white p-6 text-black'
           ref={modalRef}
           onSubmit={(e) => handleDetailsSubmit(e)}
         >

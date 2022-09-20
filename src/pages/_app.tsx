@@ -10,6 +10,15 @@ import '@/styles/colors.css';
  */
 
 function MyApp({ Component, pageProps }: AppProps) {
+  // useEffect(() => {
+  //   window.onload = () => {
+  //     console.log('window.onload');
+  //     if (typeof window !== 'undefined') {
+  //       const loader = document.getElementById('globalLoader');
+  //       if (loader) loader.style.display = 'none';
+  //     }
+  //   };
+  // }, []);
   return <Component {...pageProps} />;
 }
 

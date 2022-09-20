@@ -7,7 +7,7 @@ export default async function submit(req, res) {
   const base = new Airtable({
     apiKey: process.env.NEXT_PUBLIC_AIRTABLE_API_KEY,
   }).base('appc1kGE8syzfCfBR');
-  const hp = await captureScreenshot(websiteDetails.url, websiteDetails.name);
+  const hp = await captureScreenshot(websiteDetails.url);
   const homePage = 'https://' + req.headers.host + hp;
   websiteDetails.homePage = [{ url: homePage }];
   try {

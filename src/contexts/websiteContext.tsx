@@ -63,6 +63,7 @@ const WebsiteProvider = ({ children }: { children: React.ReactNode }) => {
         }
       });
     });
+    // console.log(temp);
     setSelectedWebsites(temp);
   }, [websites, filters]);
   useEffect(() => {

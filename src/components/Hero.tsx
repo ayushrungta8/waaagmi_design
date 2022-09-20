@@ -37,8 +37,8 @@ const Hero = ({
           />
         </div>
       </div>
-      <div className='h-56 overflow-hidden'>
-        <div className='scroll-animate flex  gap-4 '>
+      <div className='relative flex h-56 overflow-hidden'>
+        <div className='scroll-animate2 absolute z-10 flex max-w-full gap-4'>
           {websites?.map((website, index) => (
             <SmallWebCard website={website} key={index} />
           ))}
