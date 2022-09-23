@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React from 'react';
+import React, { useEffect } from 'react';
 const WebsiteForm = ({
   showDetailsForm,
   setShowDetailsForm,
@@ -17,7 +17,7 @@ const WebsiteForm = ({
     icon?: string;
   }
   const [details, setDetails] = React.useState<Details>();
-
+  const [tags, setTags] = React.useState<string[]>([]);
   const formatUrl = (url: string) => {
     if (url.includes('http://') || url.includes('https://')) {
       return url;
@@ -41,8 +41,8 @@ const WebsiteForm = ({
   const handleDetailsSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const data = new FormData(e.target as HTMLFormElement);
-    const tagsString: string = data.get('tags') as string;
-    const tags = tagsString.split(',');
+    const tagsArray: string[] = tags;
+
     const user = data.get('user') as string;
     const email = data.get('email') as string;
 
@@ -50,7 +50,7 @@ const WebsiteForm = ({
       websiteDetails: {
         name: details?.title,
         url: details?.url,
-        tags: tags.toString(),
+        tags: tagsArray.toString(),
         user: user,
         email: email,
         image: details?.image,
@@ -60,7 +60,9 @@ const WebsiteForm = ({
 
     setShowDetailsForm(false);
   };
-
+  useEffect(() => {
+    console.log(tags);
+  }, [tags]);
   return (
     <>
       <form
@@ -101,17 +103,82 @@ const WebsiteForm = ({
           </div>
           <div className='my-7'>
             <p className='mb-2'>
-              Add Tags
+              Choose Categories{' '}
               <span className='text-[#9A9AAF]'> | Required</span>
             </p>
-            <input
-              type='text'
-              name='tags'
-              required
-              placeholder='Add tags like DeFi, DAO, NFT'
-              className='w-full border-none bg-[#E2E2EA] text-[16px] outline-none focus:ring-transparent'
-              // onChange={(e) => setTags(e.target.value.split(','))}
-            />
+            <div className='flex flex-wrap gap-8 border-none bg-[#E2E2EA] p-3'>
+              <div className='flex cursor-pointer items-center gap-2'>
+                <input
+                  type='checkbox'
+                  id='Defi'
+                  name='tags'
+                  value='Defi'
+                  checked={tags.includes('Defi')}
+                  placeholder='Add tags like DeFi, DAO, NFT'
+                  className=' border-1 cursor-pointer bg-[#E2E2EA] text-[16px] outline-none focus:ring-transparent '
+                  onChange={(e) =>
+                    setTags(
+                      tags.includes(e.target.value)
+                        ? tags.filter((tag) => tag !== e.target.value)
+                        : [...tags, e.target.value]
+                    )
+                  }
+                />
+                <label
+                  htmlFor='Defi'
+                  className='cursor-pointer select-none font-light'
+                >
+                  Defi
+                </label>
+              </div>
+              <div className='flex cursor-pointer items-center gap-2'>
+                <input
+                  type='checkbox'
+                  id='DAO'
+                  name='tags'
+                  value='DAO'
+                  checked={tags.includes('DAO')}
+                  className=' border-1 cursor-pointer bg-[#E2E2EA] text-[16px] outline-none focus:ring-transparent '
+                  onChange={(e) =>
+                    setTags(
+                      tags.includes(e.target.value)
+                        ? tags.filter((tag) => tag !== e.target.value)
+                        : [...tags, e.target.value]
+                    )
+                  }
+                />
+                <label
+                  htmlFor='DAO'
+                  className='cursor-pointer select-none font-light'
+                >
+                  DAO
+                </label>
+              </div>
+
+              <div className='flex cursor-pointer items-center gap-2'>
+                <input
+                  type='checkbox'
+                  id='NFT'
+                  name='tags'
+                  value='NFT'
+                  checked={tags.includes('NFT')}
+                  className=' border-1 cursor-pointer bg-[#E2E2EA] text-[16px] outline-none focus:ring-transparent '
+                  onChange={(e) =>
+                    setTags(
+                      tags.includes(e.target.value)
+                        ? tags.filter((tag) => tag !== e.target.value)
+                        : [...tags, e.target.value]
+                    )
+                  }
+                />
+                <label
+                  htmlFor='NFT'
+                  className='cursor-pointer select-none font-light'
+                >
+                  NFT
+                </label>
+              </div>
+            </div>
           </div>
           <div className='my-7'>
             <p className='mb-2'>
@@ -141,7 +208,12 @@ const WebsiteForm = ({
           </div>
           <button
             className='w-full bg-black p-4 text-[20px] text-white'
+            style={{
+              backgroundColor: tags.length > 0 ? '#000' : '#9A9AAF',
+              cursor: tags.length > 0 ? 'pointer' : 'not-allowed',
+            }}
             type='submit'
+            disabled={tags.length === 0}
           >
             Submit Website
           </button>

@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import Marquee from 'react-fast-marquee';
 
 import SmallWebCard from '@/components/SmallWebCard';
 import WebsiteForm from '@/components/WebsiteForm';
@@ -26,9 +27,9 @@ const Hero = ({
         </div>
         <div className='flex flex-1 flex-col justify-between'>
           <div className='font-[SpaceMono] text-[18px]'>
-            Each pfpid is a non-transferrable NFT; it is locked to your Ethereum
-            wallet and can only be minted once you have verified your real-world
-            identity. Think of it as your blockchain ID card.
+            Amazingly good web design inspiration from all over the web3
+            internet daily. A one-stop collection for all design frens to find
+            landing page inspiration.
           </div>
           <WebsiteForm
             showDetailsForm={showDetailsForm}
@@ -38,11 +39,13 @@ const Hero = ({
         </div>
       </div>
       <div className='relative flex h-56 overflow-hidden'>
-        <div className='scroll-animate2 absolute z-10 flex max-w-full gap-4'>
+        {/* <div className='scroll-animate2 absolute z-10 flex max-w-full gap-4'> */}
+        <Marquee speed={100} gradient={false}>
           {websites?.map((website, index) => (
             <SmallWebCard website={website} key={index} />
           ))}
-        </div>
+        </Marquee>
+        {/* </div> */}
       </div>
     </div>
   );

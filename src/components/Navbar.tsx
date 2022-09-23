@@ -6,7 +6,13 @@ const Navbar = () => {
       <div>
         <img src='/images/logo.svg' alt='' />
       </div>
-      <div>Twitter</div>
+      <a
+        href='https://twitter.com/DesignFrens'
+        target='_blank'
+        rel='noreferrer'
+      >
+        Twitter
+      </a>
     </div>
   );
 };

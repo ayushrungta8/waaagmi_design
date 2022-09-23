@@ -33,6 +33,14 @@ const Body = () => {
           <LargeWebCard website={website} key={index} />
         ))}
       </div>
+      <a
+        className='spin fixed bottom-16 right-16 w-16'
+        href='https://frens.design'
+        target='_blank'
+        rel='noreferrer'
+      >
+        <img src='/images/loader.svg' alt='df' />
+      </a>
     </div>
   );
 };
