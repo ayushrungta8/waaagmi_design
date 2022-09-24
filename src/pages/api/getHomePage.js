@@ -1,36 +1,76 @@
-import puppeteer from 'puppeteer';
+// import puppeteer from 'puppeteer';
+import chromium from 'chrome-aws-lambda';
 
 export default async function screenshot(req, res) {
   await captureScreenshot(req.body.websiteUrl);
   res.status(200);
 }
-export const captureScreenshot = async (websiteUrl) => {
-  const browser = await puppeteer.launch({
-    defaultViewport: {
-      width: 1920,
-      height: 1080,
-      deviceScaleFactor: 1,
-    },
-  });
-  const page = await browser.newPage();
-  await page.goto(websiteUrl);
-  await new Promise((resolve) => setTimeout(resolve, 5000));
+async function getBrowserInstance() {
+  const executablePath = await chromium.executablePath;
 
-  await page.screenshot({
-    path:
-      './public/uploads/' +
+  if (!executablePath) {
+    // running locally
+    const puppeteer = require('puppeteer');
+    return puppeteer.launch({
+      args: chromium.args,
+      headless: true,
+      defaultViewport: {
+        width: 1280,
+        height: 720,
+      },
+      ignoreHTTPSErrors: true,
+    });
+  }
+
+  return chromium.puppeteer.launch({
+    args: chromium.args,
+    defaultViewport: {
+      width: 1280,
+      height: 720,
+    },
+    executablePath,
+    headless: chromium.headless,
+    ignoreHTTPSErrors: true,
+  });
+}
+export const captureScreenshot = async (websiteUrl) => {
+  let browser = null;
+
+  try {
+    browser = await getBrowserInstance();
+    const page = await browser.newPage();
+    await page.goto(websiteUrl);
+    await new Promise((resolve) => setTimeout(resolve, 5000));
+
+    await page.screenshot({
+      path:
+        './public/uploads/' +
+        websiteUrl
+          .replace('https://', '')
+          .replace('http://', '')
+          .replace('/', '') +
+        '.png',
+      fullPage: true,
+    });
+    await page.close();
+    await browser.close();
+    return (
+      '/uploads/' +
       websiteUrl
         .replace('https://', '')
         .replace('http://', '')
         .replace('/', '') +
-      '.png',
-    fullPage: true,
-  });
-  await page.close();
-  await browser.close();
-  return (
-    '/uploads/' +
-    websiteUrl.replace('https://', '').replace('http://', '').replace('/', '') +
-    '.png'
-  );
+      '.png'
+    );
+
+    // upload this buffer on AWS S3
+  } catch (error) {
+    console.log(error);
+
+    // return callback(error);
+  } finally {
+    if (browser !== null) {
+      await browser.close();
+    }
+  }
 };
