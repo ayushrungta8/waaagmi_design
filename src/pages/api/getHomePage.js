@@ -8,19 +8,19 @@ export default async function screenshot(req, res) {
 async function getBrowserInstance() {
   const executablePath = await chromium.executablePath;
 
-  if (!executablePath) {
-    // running locally
-    const puppeteer = require('puppeteer');
-    return puppeteer.launch({
-      args: chromium.args,
-      headless: true,
-      defaultViewport: {
-        width: 1280,
-        height: 720,
-      },
-      ignoreHTTPSErrors: true,
-    });
-  }
+  // if (!executablePath) {
+  //   // running locally
+  //   const puppeteer = require('puppeteer');
+  //   return puppeteer.launch({
+  //     args: chromium.args,
+  //     headless: true,
+  //     defaultViewport: {
+  //       width: 1280,
+  //       height: 720,
+  //     },
+  //     ignoreHTTPSErrors: true,
+  //   });
+  // }
 
   return chromium.puppeteer.launch({
     args: chromium.args,
@@ -65,8 +65,6 @@ export const captureScreenshot = async (websiteUrl) => {
 
     // upload this buffer on AWS S3
   } catch (error) {
-    console.log(error);
-
     // return callback(error);
   } finally {
     if (browser !== null) {
