@@ -34,10 +34,9 @@ async function getBrowserInstance() {
   });
 }
 export const captureScreenshot = async (websiteUrl) => {
-  let browser = null;
-
+  console.log('captureScreenshot', websiteUrl);
   try {
-    browser = await getBrowserInstance();
+    const browser = await getBrowserInstance();
     const page = await browser.newPage();
     await page.goto(websiteUrl);
     await new Promise((resolve) => setTimeout(resolve, 5000));
@@ -65,10 +64,6 @@ export const captureScreenshot = async (websiteUrl) => {
 
     // upload this buffer on AWS S3
   } catch (error) {
-    // return callback(error);
-  } finally {
-    if (browser !== null) {
-      await browser.close();
-    }
+    return error;
   }
 };
