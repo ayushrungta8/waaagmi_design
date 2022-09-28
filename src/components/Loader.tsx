@@ -6,7 +6,7 @@ import LoaderData from '~/images/loader.json';
 const Loader = () => {
   return (
     <div
-      className=' absolute top-0 left-0 z-50 flex h-screen w-full  items-center justify-center bg-black bg-opacity-50 '
+      className=' absolute top-0 left-0 z-50 flex h-screen w-full  items-center justify-center bg-black bg-opacity-80 '
       id='globalLoader'
     >
       {/* <img src='/images/loader.svg' alt='loader' className='spin' /> */}
