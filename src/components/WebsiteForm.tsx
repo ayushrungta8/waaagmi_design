@@ -1,5 +1,8 @@
 import axios from 'axios';
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
+
+import { LoaderContext } from '@/contexts/loaderContext';
+
 const WebsiteForm = ({
   showDetailsForm,
   setShowDetailsForm,
@@ -16,6 +19,7 @@ const WebsiteForm = ({
     image: string;
     icon?: string;
   }
+  const { loading, setLoading } = useContext(LoaderContext);
   const [details, setDetails] = React.useState<Details>();
   const [tags, setTags] = React.useState<string[]>([]);
   const formatUrl = (url: string) => {
@@ -25,6 +29,7 @@ const WebsiteForm = ({
     return `http://${url}`;
   };
   const handleSubmit = async (e: React.FormEvent) => {
+    setLoading(true);
     e.preventDefault();
     const data = new FormData(e.target as HTMLFormElement);
     const tempUrl: string = data.get('url') as string;
@@ -37,8 +42,10 @@ const WebsiteForm = ({
     } catch (err) {
       alert('Website not found. Please check the url and try again.');
     }
+    setLoading(false);
   };
   const handleDetailsSubmit = async (e: React.FormEvent) => {
+    setLoading(true);
     e.preventDefault();
     const data = new FormData(e.target as HTMLFormElement);
     const tagsArray: string[] = tags;
@@ -59,6 +66,7 @@ const WebsiteForm = ({
     });
 
     setShowDetailsForm(false);
+    setLoading(false);
   };
   useEffect(() => {
     console.log(tags);
