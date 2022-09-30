@@ -3,13 +3,19 @@ import React from 'react';
 import { Website } from '@/contexts/websiteContext';
 
 const LargeWebCard = ({ website }: { website: Website }) => {
+  const bgimg = new Image();
+  bgimg.src = website?.homePage?.[0].url || website.image || '';
+  //get height of image
+  const height = bgimg.height;
+  console.log(height);
   return (
     <div
-      className='h-full min-h-[400px] w-full min-w-[200px] bg-cover bg-top bg-no-repeat'
+      className='bg-scroll-animate h-full min-h-[400px] w-full min-w-[200px] bg-cover bg-top bg-no-repeat'
       style={{
         backgroundImage: `url(${
           website?.homePage ? website.homePage[0].url : website.image
         })`,
+        animationDuration: `${height / 200}s`,
       }}
     >
       <a

@@ -74,7 +74,7 @@ const WebsiteForm = ({
   return (
     <>
       <form
-        className=' flex border border-white  text-[#535362]'
+        className='  flex border  border-white text-[#535362]'
         onSubmit={(e) => handleSubmit(e)}
       >
         <input
@@ -94,7 +94,7 @@ const WebsiteForm = ({
 
       {showDetailsForm && (
         <form
-          className='slideIn fixed top-0 right-0 z-50 h-[100vh] w-[400px] overflow-auto bg-white p-6 text-black'
+          className='slideIn fixed top-0 right-0 z-[2000] h-[100vh] w-[400px] overflow-auto bg-white p-6 text-black'
           ref={modalRef}
           onSubmit={(e) => handleDetailsSubmit(e)}
         >

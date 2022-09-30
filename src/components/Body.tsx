@@ -31,18 +31,18 @@ const Body = () => {
       {loading ? (
         <Loader />
       ) : (
-        <div className='px-32'>
-          <h2 className='text-[42px]'>
+        <div className='px-4 md:px-32'>
+          <h2 className='text-2xl  md:text-[42px]'>
             Check the Astronomically web design inspiration
           </h2>
           <FilterBar websites={websites} />
-          <div className='mt-16 grid grid-cols-3 gap-8'>
+          <div className='mt-16 grid gap-8 pb-8 sm:grid-cols-1 md:grid-cols-3'>
             {selectedWebsites?.map((website, index) => (
               <LargeWebCard website={website} key={index} />
             ))}
           </div>
           <a
-            className='spin fixed bottom-16 right-16 w-16'
+            className='spin fixed bottom-4 right-4 z-[1500] w-16 md:bottom-16 md:right-16'
             href='https://frens.design'
             target='_blank'
             rel='noreferrer'

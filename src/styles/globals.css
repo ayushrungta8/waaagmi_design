@@ -70,3 +70,15 @@
 .scroll-animate2 {
   animation: scrollreverse 10s linear 1s infinite;
 }
+
+@keyframes bg-scroll {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 0 100%;
+  }
+}
+.bg-scroll-animate:hover {
+  animation: bg-scroll linear infinite;
+}

@@ -26,7 +26,7 @@ const FilterBar = ({ websites }: { websites: Website[] }) => {
   };
 
   return (
-    <div className='mt-8 flex gap-3'>
+    <div className='mt-8 flex flex-wrap gap-3'>
       {tags?.map((tag) => (
         <div
           key={tag}
